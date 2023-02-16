@@ -77,10 +77,10 @@ apiRouter.get('/calc-residential/:select/:floors/:app', (req, res) => {
   if (selectFind !== "Standard" && selectFind !== "Premium" && selectFind !== "Excelium") return res.status(404).send("Invalid tier");
   
   const floorsFind = parseInt(req.params.floors);
-  if (isNaN(floorsFind)) return res.status(404).send("Not a number");
+  if (isNaN(floorsFind) || floorsFind <= 0) return res.status(404).send("Invalid number");
 
   const appFind = parseInt(req.params.app);
-  if (isNaN(appFind)) return res.status(404).send("Not a number");
+  if (isNaN(appFind) || appFind <= 0) return res.status(404).send("Invalid number");
 
   costFees.push(calculateResidential(selectFind, floorsFind, appFind))
 
