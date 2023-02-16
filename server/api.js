@@ -43,8 +43,10 @@ apiRouter.get('/region-avg/:region', (req, res) => {
   // Returns the list of objects that contains :region 
   const regionList = database.filter(c => c.region === req.params.region);
 
-  // Fee calculations
+  // Returns an array of fee related to the selected region
   const regionMapFee = regionList.map(c => c.fee);
+  
+  // Parse all string datatypes in the array into float
   var parseFee = regionMapFee.map(function (x) {
     return parseFloat(x, 10);
 
@@ -52,8 +54,10 @@ apiRouter.get('/region-avg/:region', (req, res) => {
 
   console.log("Average fee: " + calculateAverage(parseFee));
 
-  // Rating calculations
+  // Returns an array of rating related to the selected region
   const regionMapRating = regionList.map(c => c.rating);
+  
+  // Parse all string datatypes in the array into float
   var parseRating = regionMapRating.map(function (x) {
     return parseFloat(x, 10);
 
@@ -93,6 +97,7 @@ apiRouter.get('/calc-residential/:select/:floors/:app', (req, res) => {
 
 })
 
+// POST body saves the data into postDB array
 apiRouter.post('/contact-us', (req, res) => {
   const { error } = validatePost(req.body);
   if (error) return res.status(404).send(error.details[0].message);
