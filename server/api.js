@@ -7,6 +7,8 @@ const { calculateResidential, calculateAverage, titleCase, validatePost } = requ
 
 const PORT = process.env.PORT;
 
+const NAME = process.env.NAME
+
 // Get returns Hello World
 apiRouter.get('/hello', (req, res) => {
   res.send("Hello World");
@@ -21,7 +23,7 @@ apiRouter.get('/error', (req, res) => {
 
 // Get returns the status
 apiRouter.get('/status', (req, res) => {
-  res.send(`listening on port ${PORT}`);
+  res.send(`listening on ${NAME} port ${PORT}`);
 
 })
 
