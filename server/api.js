@@ -79,17 +79,22 @@ apiRouter.get('/region-avg/:region', (req, res) => {
 
 // Get returns the required elevator number and the total cost
 apiRouter.get('/calc-residential/:select/:floors/:app', (req, res) => {
+  
+  // Save param into a variable, validation for the tier
   const selectFind = titleCase(req.params.select);
   if (selectFind !== "Standard" && selectFind !== "Premium" && selectFind !== "Excelium") return res.status(404).send("Invalid tier");
   
+  // Save param into variable, check if param is a number and over 0
   const floorsFind = parseInt(req.params.floors);
   if (isNaN(floorsFind) || floorsFind <= 0) return res.status(404).send("Invalid number");
 
+  // Save param into variable, check if param is a number and over 0
   const appFind = parseInt(req.params.app);
   if (isNaN(appFind) || appFind <= 0) return res.status(404).send("Invalid number");
 
+  // Saves the result of calculations into costFees array
   costFees.push(calculateResidential(selectFind, floorsFind, appFind))
-
+  
   console.log("Cost Fees saved: ")
   console.log(costFees)
 
@@ -99,9 +104,12 @@ apiRouter.get('/calc-residential/:select/:floors/:app', (req, res) => {
 
 // POST body saves the data into postDB array
 apiRouter.post('/contact-us', (req, res) => {
+  
+  // Validation for the correct outputs
   const { error } = validatePost(req.body);
   if (error) return res.status(404).send(error.details[0].message);
 
+  // Schema for the body, add a new id for every post
   const userPost = {
       id: postDB.length + 1,
       first_name: req.body.first_name,
@@ -109,6 +117,7 @@ apiRouter.post('/contact-us', (req, res) => {
       message: req.body.message
 
   }
+  // Push into the users post array
   postDB.push(userPost);
 
   console.log(postDB);
