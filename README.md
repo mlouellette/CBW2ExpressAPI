@@ -36,12 +36,12 @@ Create a route that allows you to POST a 'first_name', 'last_name', and a 'messa
 
  
 
-GET - /region-avg
+GET - /region-avg/:region
 
 Create a route that accepts a region as a query parameter and returns the average rating and fee for agents in that region
 
  
 
-GET - /calc-residential
+GET - /calc-residential/:select/:floors/:app
 
 Create a route that returns the number of elevators required and total cost for a Residential building type quote based on the math of the quote form
