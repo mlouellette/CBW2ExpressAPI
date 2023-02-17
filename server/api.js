@@ -117,7 +117,7 @@ apiRouter.post('/contact-us', (req, res) => {
       message: req.body.message
 
   }
-  // Push into the users post array
+  // Push into the postDB array
   postDB.push(userPost);
 
   console.log(postDB);
