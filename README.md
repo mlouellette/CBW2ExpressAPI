@@ -1,4 +1,4 @@
-# CodeBoxx Week 2 Express API
+# Express API project
 
 ### Usage
 
